@@ -1,6 +1,11 @@
 const React = require("react");
-const ReactDOM = require("react-dom");
+const ReactDOM = require("react-dom/client");
 
-function Lol(props) {return <h1>{props.text}</h1>;}
+const Time = () => <h2>{new Date().toLocaleTimeString()}</h2>;
 
-ReactDOM.render(<Lol text="LOL"/>, document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+function tick() {
+  root.render(<React.StrictMode><Time /></React.StrictMode>);
+}
+setInterval(tick, 1000);
