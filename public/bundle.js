@@ -58,7 +58,7 @@ eval("const React = __webpack_require__(/*! react */ \"./node_modules/react/inde
   \*********************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("const React = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\nfunction Time() {\n  return /*#__PURE__*/React.createElement(\"h2\", null, new Date().toLocaleTimeString());\n}\nmodule.exports = Time;\n\n//# sourceURL=webpack://webapp/./src/components/time.jsx?");
+eval("const React = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\nconst {\n  styled,\n  css\n} = __webpack_require__(/*! styled-components */ \"./node_modules/styled-components/dist/styled-components.browser.esm.js\");\nconst TimeStyle = styled.h2`\n  color: blue;\n`;\nfunction Time() {\n  const [time, setTime] = React.useState(new Date().toLocaleTimeString());\n  tick = function () {\n    setTime(new Date().toLocaleTimeString());\n  };\n  setInterval(tick, 1000);\n  return /*#__PURE__*/React.createElement(TimeStyle, null, time);\n}\nmodule.exports = Time;\n\n//# sourceURL=webpack://webapp/./src/components/time.jsx?");
 
 /***/ }),
 
