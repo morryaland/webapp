@@ -1,6 +1,6 @@
 const React = require("react");
 const ReactDOM = require("react-dom/client");
-const PersonList = require("./person.jsx");
+const PersonList = require("./personList.jsx");
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

@@ -48,7 +48,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \***********************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("const React = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\nconst ReactDOM = __webpack_require__(/*! react-dom/client */ \"./node_modules/react-dom/client.js\");\nconst PersonList = __webpack_require__(/*! ./person.jsx */ \"./src/person.jsx\");\nconst root = ReactDOM.createRoot(document.getElementById(\"root\"));\nroot.render( /*#__PURE__*/React.createElement(React.StrictMode, null, /*#__PURE__*/React.createElement(PersonList, null)));\n\n//# sourceURL=webpack://webapp/./src/index.jsx?");
+eval("const React = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\nconst ReactDOM = __webpack_require__(/*! react-dom/client */ \"./node_modules/react-dom/client.js\");\nconst PersonList = __webpack_require__(/*! ./personList.jsx */ \"./src/personList.jsx\");\nconst root = ReactDOM.createRoot(document.getElementById(\"root\"));\nroot.render( /*#__PURE__*/React.createElement(React.StrictMode, null, /*#__PURE__*/React.createElement(PersonList, null)));\n\n//# sourceURL=webpack://webapp/./src/index.jsx?");
 
 /***/ }),
 
@@ -58,7 +58,27 @@ eval("const React = __webpack_require__(/*! react */ \"./node_modules/react/inde
   \************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("const React = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\nconst {\n  default: styled\n} = __webpack_require__(/*! styled-components */ \"./node_modules/styled-components/dist/styled-components.browser.esm.js\");\nconst Base = styled.div`\n  border: 1px solid black;\n`;\nconst Table = styled(Base).attrs({\n  as: 'table'\n})`\n  border-collapse: collapse;\n`;\nconst TableRow = styled(Base).attrs({\n  as: 'tr'\n})``;\nconst TableData = styled(Base).attrs({\n  as: 'td'\n})``;\nconst TableHeader = styled(Base).attrs({\n  as: 'th'\n})``;\nfunction Person(props) {\n  return /*#__PURE__*/React.createElement(TableRow, null, /*#__PURE__*/React.createElement(TableData, null, props.id), /*#__PURE__*/React.createElement(TableData, null, props.name), /*#__PURE__*/React.createElement(TableData, null, props.age));\n}\nfunction PersonList(props) {\n  const [personComponentList, SetPersonComonentList] = React.useState();\n  async function GetPerson() {\n    const response = await fetch(\"/api/persons\", {\n      method: \"GET\",\n      headers: {\n        \"Accept\": \"application/json\"\n      }\n    });\n    if (!response.ok) return;\n    let p = await response.json();\n    let personList = p.map(person => /*#__PURE__*/React.createElement(Person, {\n      key: person.id,\n      id: person.id,\n      name: person.name,\n      age: person.age\n    }));\n    SetPersonComonentList(personList);\n  }\n  return /*#__PURE__*/React.createElement(\"div\", null, /*#__PURE__*/React.createElement(Table, null, /*#__PURE__*/React.createElement(\"thead\", null, /*#__PURE__*/React.createElement(TableRow, null, /*#__PURE__*/React.createElement(TableHeader, null, \"ID\"), \" \", /*#__PURE__*/React.createElement(TableHeader, null, \"NAME\"), \" \", /*#__PURE__*/React.createElement(TableHeader, null, \"AGE\"))), /*#__PURE__*/React.createElement(\"tbody\", null, personComponentList)), /*#__PURE__*/React.createElement(\"button\", {\n    onClick: GetPerson\n  }, \"Get Data\"));\n}\nmodule.exports = PersonList;\n\n//# sourceURL=webpack://webapp/./src/person.jsx?");
+eval("const React = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\nconst {\n  TableRow,\n  TableData\n} = __webpack_require__(/*! ./ui/table.jsx */ \"./src/ui/table.jsx\");\nfunction Person(props) {\n  let person = props.person;\n  return /*#__PURE__*/React.createElement(TableRow, null, /*#__PURE__*/React.createElement(TableData, null, person.id), /*#__PURE__*/React.createElement(TableData, null, person.name), /*#__PURE__*/React.createElement(TableData, null, person.age));\n}\nmodule.exports = Person;\n\n//# sourceURL=webpack://webapp/./src/person.jsx?");
+
+/***/ }),
+
+/***/ "./src/personList.jsx":
+/*!****************************!*\
+  !*** ./src/personList.jsx ***!
+  \****************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("const React = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\nconst {\n  TableRow,\n  Table,\n  TableHeader\n} = __webpack_require__(/*! ./ui/table.jsx */ \"./src/ui/table.jsx\");\nconst Person = __webpack_require__(/*! ./person.jsx */ \"./src/person.jsx\");\nfunction PersonList(props) {\n  const [personComponentList, SetPersonComonentList] = React.useState();\n  async function GetPerson() {\n    const response = await fetch(\"/api/persons\", {\n      method: \"GET\",\n      headers: {\n        \"Accept\": \"application/json\"\n      }\n    });\n    if (!response.ok) return;\n    let p = await response.json();\n    let personList = p.map(person => /*#__PURE__*/React.createElement(Person, {\n      key: person.id,\n      person: person\n    }));\n    SetPersonComonentList(personList);\n  }\n  return /*#__PURE__*/React.createElement(\"div\", null, /*#__PURE__*/React.createElement(Table, null, /*#__PURE__*/React.createElement(\"thead\", null, /*#__PURE__*/React.createElement(TableRow, null, /*#__PURE__*/React.createElement(TableHeader, null, \"ID\"), \" \", /*#__PURE__*/React.createElement(TableHeader, null, \"NAME\"), \" \", /*#__PURE__*/React.createElement(TableHeader, null, \"AGE\"))), /*#__PURE__*/React.createElement(\"tbody\", null, personComponentList)), /*#__PURE__*/React.createElement(\"button\", {\n    onClick: GetPerson\n  }, \"Get Data\"));\n}\nmodule.exports = PersonList;\n\n//# sourceURL=webpack://webapp/./src/personList.jsx?");
+
+/***/ }),
+
+/***/ "./src/ui/table.jsx":
+/*!**************************!*\
+  !*** ./src/ui/table.jsx ***!
+  \**************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("const React = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\nconst {\n  styled\n} = __webpack_require__(/*! styled-components */ \"./node_modules/styled-components/dist/styled-components.browser.esm.js\");\nconst Base = styled.div`\n  border: 1px solid black;\n`;\nconst Table = styled(Base).attrs({\n  as: 'table'\n})`\n  border-collapse: collapse;\n`;\nconst TableRow = styled(Base).attrs({\n  as: 'tr'\n})``;\nconst TableData = styled(Base).attrs({\n  as: 'td'\n})``;\nconst TableHeader = styled(Base).attrs({\n  as: 'th'\n})``;\nmodule.exports = {\n  Table,\n  TableRow,\n  TableData,\n  TableHeader\n};\n\n//# sourceURL=webpack://webapp/./src/ui/table.jsx?");
 
 /***/ }),
 
