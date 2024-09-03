@@ -48,7 +48,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \***********************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("const React = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\nconst ReactDOM = __webpack_require__(/*! react-dom/client */ \"./node_modules/react-dom/client.js\");\nconst PersonList = __webpack_require__(/*! ./personList.jsx */ \"./src/personList.jsx\");\nconst root = ReactDOM.createRoot(document.getElementById(\"root\"));\nroot.render( /*#__PURE__*/React.createElement(React.StrictMode, null, /*#__PURE__*/React.createElement(PersonList, null)));\n\n//# sourceURL=webpack://webapp/./src/index.jsx?");
+eval("const React = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\nconst ReactDOM = __webpack_require__(/*! react-dom/client */ \"./node_modules/react-dom/client.js\");\nconst PersonList = __webpack_require__(/*! ./personList.jsx */ \"./src/personList.jsx\");\nconst PersonForm = __webpack_require__(/*! ./personForm.jsx */ \"./src/personForm.jsx\");\nconst root = ReactDOM.createRoot(document.getElementById(\"root\"));\nroot.render( /*#__PURE__*/React.createElement(React.StrictMode, null, /*#__PURE__*/React.createElement(PersonList, null), /*#__PURE__*/React.createElement(PersonForm, null)));\n\n//# sourceURL=webpack://webapp/./src/index.jsx?");
 
 /***/ }),
 
@@ -62,6 +62,16 @@ eval("const React = __webpack_require__(/*! react */ \"./node_modules/react/inde
 
 /***/ }),
 
+/***/ "./src/personForm.jsx":
+/*!****************************!*\
+  !*** ./src/personForm.jsx ***!
+  \****************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("const React = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\nconst {\n  Form,\n  Input,\n  Label\n} = __webpack_require__(/*! ./ui/form.jsx */ \"./src/ui/form.jsx\");\nfunction PersonForm() {\n  const name = React.useRef(null);\n  const age = React.useRef(null);\n  async function setData(e) {\n    e.preventDefault();\n    const response = await fetch(\"/api/persons\", {\n      method: \"POST\",\n      headers: {\n        \"Accept\": \"application/json\"\n      },\n      body: JSON.stringify({\n        name: name.current.value,\n        age: age.current.value\n      })\n    });\n    if (!response.ok) {\n      console.error(\"data not send\");\n      return;\n    }\n  }\n  return /*#__PURE__*/React.createElement(Form, {\n    onSubmit: setData\n  }, /*#__PURE__*/React.createElement(Label, null, \"Name: \"), /*#__PURE__*/React.createElement(Input, {\n    type: \"text\",\n    ref: name\n  }), /*#__PURE__*/React.createElement(\"br\", null), /*#__PURE__*/React.createElement(Label, null, \"Age: \"), /*#__PURE__*/React.createElement(Input, {\n    type: \"number\",\n    ref: age\n  }), /*#__PURE__*/React.createElement(\"br\", null), /*#__PURE__*/React.createElement(Input, {\n    type: \"submit\",\n    value: \"Set Data\"\n  }));\n}\nmodule.exports = PersonForm;\n\n//# sourceURL=webpack://webapp/./src/personForm.jsx?");
+
+/***/ }),
+
 /***/ "./src/personList.jsx":
 /*!****************************!*\
   !*** ./src/personList.jsx ***!
@@ -69,6 +79,16 @@ eval("const React = __webpack_require__(/*! react */ \"./node_modules/react/inde
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 eval("const React = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\nconst {\n  TableRow,\n  Table,\n  TableHeader\n} = __webpack_require__(/*! ./ui/table.jsx */ \"./src/ui/table.jsx\");\nconst Person = __webpack_require__(/*! ./person.jsx */ \"./src/person.jsx\");\nfunction PersonList(props) {\n  const [personComponentList, SetPersonComonentList] = React.useState();\n  async function GetPerson() {\n    const response = await fetch(\"/api/persons\", {\n      method: \"GET\",\n      headers: {\n        \"Accept\": \"application/json\"\n      }\n    });\n    if (!response.ok) return;\n    let p = await response.json();\n    let personList = p.map(person => /*#__PURE__*/React.createElement(Person, {\n      key: person.id,\n      person: person\n    }));\n    SetPersonComonentList(personList);\n  }\n  return /*#__PURE__*/React.createElement(\"div\", null, /*#__PURE__*/React.createElement(Table, null, /*#__PURE__*/React.createElement(\"thead\", null, /*#__PURE__*/React.createElement(TableRow, null, /*#__PURE__*/React.createElement(TableHeader, null, \"ID\"), \" \", /*#__PURE__*/React.createElement(TableHeader, null, \"NAME\"), \" \", /*#__PURE__*/React.createElement(TableHeader, null, \"AGE\"))), /*#__PURE__*/React.createElement(\"tbody\", null, personComponentList)), /*#__PURE__*/React.createElement(\"button\", {\n    onClick: GetPerson\n  }, \"Get Data\"));\n}\nmodule.exports = PersonList;\n\n//# sourceURL=webpack://webapp/./src/personList.jsx?");
+
+/***/ }),
+
+/***/ "./src/ui/form.jsx":
+/*!*************************!*\
+  !*** ./src/ui/form.jsx ***!
+  \*************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("const React = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\nconst {\n  styled\n} = __webpack_require__(/*! styled-components */ \"./node_modules/styled-components/dist/styled-components.browser.esm.js\");\nconst Label = styled.label`\n\n`;\nconst Form = styled.form`\n  \n`;\nconst Input = styled.input`\n  \n`;\nmodule.exports = {\n  Form,\n  Input,\n  Label\n};\n\n//# sourceURL=webpack://webapp/./src/ui/form.jsx?");
 
 /***/ }),
 
