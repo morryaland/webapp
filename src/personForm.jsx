@@ -11,7 +11,7 @@ function PersonForm()
     e.preventDefault();
     const response = await fetch("/api/persons", {
       method: "POST",
-      headers: { "Accept": "application/json" },
+      headers: { "Accept": "application/json", "Content-Type": "application/json" },
       body: JSON.stringify({
         name: name.current.value,
         age: age.current.value
